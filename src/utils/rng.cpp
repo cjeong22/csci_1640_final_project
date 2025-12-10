@@ -5,25 +5,17 @@
 #include <stdexcept>
 #include <cmath>
 
-#include "../../include/utils/int64.hpp"
 #include "../../include/utils/rng.hpp"
+#include "../../include/utils/int64.hpp"
 
+RNG::RNG() : gen(std::random_device{}()), dist(0, std::numeric_limits<int64>::max()) {}
 
-RNG::RNG(int64 seed)
-    : gen(seed ? seed : std::random_device{}()),
-      dist_uniform(0, std::numeric_limits<int64>::max())
-{}
-
-int64 RNG::uniformMod(int64 q) {
-    return dist_uniform(gen) % q;
-}
-
-int RNG::bit() {
-    return (int)(dist_uniform(gen) & 1);
+int RNG::randInt(int max_m) {  // uniform in [0, max_m]
+    return (int)(dist(gen) % (max_m + 1));
 }
 
 int RNG::smallError() {
-    int r = (int)(dist_uniform(gen) % 10);
+    int r = (int)(dist(gen) % 10);
     if (r == 0) return 1;
     if (r == 1) return -1;
     return 0;

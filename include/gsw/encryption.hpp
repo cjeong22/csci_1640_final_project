@@ -3,4 +3,5 @@
 #include "../../include/utils/matrix.hpp"
 
 Matrix gadgetMatrixG(const Params &params);
-Matrix encryptBit(int m, const PublicKey &pk, const Params &params, RNG &rng);
+Matrix gadgetInverse(const Matrix &C, const Params &params, const Matrix &G);
+Matrix encryptInt(int m, const Params &p, RNG &rng, const Matrix &G);

@@ -1,23 +1,13 @@
+#include <iostream>
+
 #include "../../include/utils/matrix.hpp"
 #include "../../include/utils/rng.hpp"
+#include "../../include/gsw/params.hpp"
 
-Matrix zeros(int rows, int cols) {
-    return Matrix(rows, Vector(cols, 0));
-}
+using std::cout;
 
-Matrix randomMatrixMod(int rows, int cols, int64 q, RNG &rng) {
-    Matrix M(rows, Vector(cols));
-    for (int i = 0; i < rows; ++i)
-        for (int j = 0; j < cols; ++j)
-            M[i][j] = rng.uniformMod(q);
-    return M;
-}
-
-Vector randomVectorMod(int len, int64 q, RNG &rng) {
-    Vector v(len);
-    for (int i = 0; i < len; ++i)
-        v[i] = rng.uniformMod(q);
-    return v;
+Matrix zeros(int k) {
+    return Matrix(k, vector<int64>(k, 0));
 }
 
 Vector matVecMulMod(const Matrix &A, const Vector &x, int64 q) {
@@ -31,4 +21,29 @@ Vector matVecMulMod(const Matrix &A, const Vector &x, int64 q) {
         res[i] = modq(acc, q);
     }
     return res;
+}
+
+Matrix matMulMod(const Matrix &A, const Matrix &B, const Params &p) {
+    Matrix C = zeros(p.k);
+    for (int i = 0; i < p.k; ++i)
+        for (int j = 0; j < p.k; ++j) {
+            long long acc = 0;
+            for (int t = 0; t < p.k; ++t)
+                acc += A[i][t] * B[t][j];
+            C[i][j] = modq(acc, p.q);
+        }
+    return C;
+}
+
+
+void printVector(const Vector &v) {
+    for (auto x : v) cout << x << " ";
+    cout << "\n";
+}
+
+void printMatrix(const Matrix &M) {
+    for (const auto &row : M) {
+        for (auto x : row) cout << x << " ";
+        cout << "\n";
+    }
 }
