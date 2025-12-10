@@ -1,7 +1,7 @@
 CXX      := g++
 CXXFLAGS := -g -std=c++17 -Iinclude
 
-SRC := $(wildcard src/*.cpp src/utils/*.cpp)
+SRC := $(wildcard src/*.cpp src/utils/*.cpp src/gsw/*.cpp)
 OBJ := $(SRC:.cpp=.o)
 
 TARGET := exec

@@ -2,21 +2,15 @@
 #include <vector>
 #include <cstddef>
 
-class Matrix {
-    public:
-        Matrix(size_t rows, size_t cols);
-        int &operator()(size_t r, size_t c);
-        const int &operator()(size_t r, size_t c) const;
-        friend std::ostream& operator<<(std::ostream& os, const Matrix& m); 
+#include "./int64.hpp"
+#include "./rng.hpp"
 
-        Matrix multiply(const Matrix& m) const;
-        Matrix add(const Matrix &m) const;
+using std::vector;
 
-        size_t rows() const;
-        size_t cols() const;
+using Matrix = vector<vector<int64>>;
+using Vector = vector<int64>;
 
-    private:
-        size_t rows_;
-        size_t cols_;
-        std::vector<int> data_;
-};
+Matrix zeros(int rows, int cols);
+Matrix randomMatrixMod(int rows, int cols, int64 q, RNG &rng);
+Vector randomVectorMod(int len, int64 q, RNG &rng);
+Vector matVecMulMod(const Matrix &A, const Vector &x, int64 q);
