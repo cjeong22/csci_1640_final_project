@@ -1,4 +1,3 @@
-#include "../../include/gsw/keys.hpp"
 #include "../../include/gsw/params.hpp"
 #include "../../include/utils/matrix.hpp"
 

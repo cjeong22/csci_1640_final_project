@@ -20,7 +20,7 @@ Matrix gadgetInverse(const Matrix &C, const Params &p, const Matrix &G) {
         int64 gi = G[i][i];
         for (int j = 0; j < p.k; ++j) {
             int64 x = C[i][j];
-            if (x > p.q / 2) x -= p.q;   // center to (-q/2, q/2]
+            if (x > p.q / 2) x -= p.q;
             long double t = (long double)x / (long double)gi;
             T[i][j] = (int64)std::llround(t);
         }
@@ -31,12 +31,10 @@ Matrix gadgetInverse(const Matrix &C, const Params &p, const Matrix &G) {
 Matrix encryptInt(int m, const Params &p, RNG &rng, const Matrix &G) {
     Matrix C = zeros(p.k);
 
-    // m * G
     for (int i = 0; i < p.k; ++i)
         for (int j = 0; j < p.k; ++j)
             C[i][j] = modq((int64)m * G[i][j], p.q);
 
-    // add small +-1 noise
     for (int i = 0; i < p.k; ++i)
         for (int j = 0; j < p.k; ++j)
             C[i][j] = modq(C[i][j] + rng.smallError(), p.q);

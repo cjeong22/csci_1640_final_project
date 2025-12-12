@@ -1,6 +1,5 @@
 #include "../../include/gsw/decryption.hpp"
 #include "../../include/gsw/encryption.hpp"
-#include "../../include/gsw/keys.hpp"
 #include "../../include/gsw/params.hpp"
 #include "../../include/utils/matrix.hpp"
 

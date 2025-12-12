@@ -14,18 +14,15 @@
 
 using std::cout;
 
-
-// -----------------------------
-// Demo + stress test
-// -----------------------------
 int main() {
-    Params p{8, (1LL << 15), 2};  // k=8, q=32768, base=2
+    Params p{8, (1LL << 15), 2};
     RNG rng;
     Matrix G = gadgetMatrixG(p);
 
-    const int MAX_M = 5;  // messages in [0, MAX_M]
+    printMatrix(G);
 
-    // Demo: multiply 3 * 4
+    const int MAX_M = 5; 
+
     int m1 = 3;
     int m2 = 4;
 
@@ -36,8 +33,8 @@ int main() {
 
     int dec1   = decryptInt(C1,   p, G, MAX_M);
     int dec2   = decryptInt(C2,   p, G, MAX_M);
-    int decAdd = decryptInt(Cadd, p, G, 2 * MAX_M);          // m1 + m2 ≤ 2*MAX_M
-    int decMul = decryptInt(Cmul, p, G, MAX_M * MAX_M);      // m1*m2 ≤ MAX_M^2
+    int decAdd = decryptInt(Cadd, p, G, 2 * MAX_M);    
+    int decMul = decryptInt(Cmul, p, G, MAX_M * MAX_M); 
 
     cout << "m1 = " << m1 << ", m2 = " << m2 << "\n";
     cout << "Dec(m1):        " << dec1   << "\n";
@@ -45,7 +42,6 @@ int main() {
     cout << "Dec(m1 + m2):   " << decAdd << "\n";
     cout << "Dec(m1 * m2):   " << decMul << "\n\n";
 
-    // Random stress test
     int trials = 200;
     int ok = 0;
 

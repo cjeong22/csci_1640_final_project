@@ -10,7 +10,7 @@
 
 RNG::RNG() : gen(std::random_device{}()), dist(0, std::numeric_limits<int64>::max()) {}
 
-int RNG::randInt(int max_m) {  // uniform in [0, max_m]
+int RNG::randInt(int max_m) {
     return (int)(dist(gen) % (max_m + 1));
 }
 
