@@ -4,10 +4,10 @@
 #include "../../include/gsw/encryption.hpp"
 
 Matrix addC(const Matrix &C1, const Matrix &C2, const Params &p) {
-    Matrix C = zeros(p.k);
+    Matrix C = Matrix(p.k);
     for (int i = 0; i < p.k; ++i)
         for (int j = 0; j < p.k; ++j)
-            C[i][j] = modq(C1[i][j] + C2[i][j], p.q);
+            C(i, j) = modq(C1(i, j) + C2(i, j), p.q);
     return C;
 }
 

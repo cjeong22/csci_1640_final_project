@@ -9,7 +9,7 @@ int decryptInt(const Matrix &C, const Params &p, const Matrix &G, int max_m) {
 
     long double sumDiag = 0.0;
     for (int i = 0; i < p.k; ++i)
-        sumDiag += T[i][i];
+        sumDiag += T(i, i);
 
     long double avg = sumDiag / (long double)p.k;
     int m_hat = (int)std::floor(avg + 0.5);

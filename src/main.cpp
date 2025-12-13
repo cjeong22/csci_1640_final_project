@@ -12,14 +12,10 @@
 #include "./../include/utils/int64.hpp"
 #include "./../include/utils/matrix.hpp"
 
-using std::cout;
-
 int main() {
     Params p{8, (1LL << 15), 2};
     RNG rng;
     Matrix G = gadgetMatrixG(p);
-
-    printMatrix(G);
 
     const int MAX_M = 5; 
 
@@ -36,13 +32,13 @@ int main() {
     int decAdd = decryptInt(Cadd, p, G, 2 * MAX_M);    
     int decMul = decryptInt(Cmul, p, G, MAX_M * MAX_M); 
 
-    cout << "m1 = " << m1 << ", m2 = " << m2 << "\n";
-    cout << "Dec(m1):        " << dec1   << "\n";
-    cout << "Dec(m2):        " << dec2   << "\n";
-    cout << "Dec(m1 + m2):   " << decAdd << "\n";
-    cout << "Dec(m1 * m2):   " << decMul << "\n\n";
+    std::cout << "m1 = " << m1 << ", m2 = " << m2 << "\n";
+    std::cout << "Dec(m1):        " << dec1   << "\n";
+    std::cout << "Dec(m2):        " << dec2   << "\n";
+    std::cout << "Dec(m1 + m2):   " << decAdd << "\n";
+    std::cout << "Dec(m1 * m2):   " << decMul << "\n\n";
 
-    int trials = 200;
+    int trials = 1000;
     int ok = 0;
 
     for (int t = 0; t < trials; ++t) {
@@ -67,7 +63,7 @@ int main() {
 
         if (good) ok++;
         else {
-            cout << "FAIL a=" << a << " b=" << b
+            std::cout << "FAIL a=" << a << " b=" << b
                  << "  da=" << da
                  << " db=" << db
                  << " add=" << dadd2
@@ -75,6 +71,6 @@ int main() {
         }
     }
 
-    cout << "Passed " << ok << "/" << trials << " random trials.\n";
+    std::cout << "Passed " << ok << "/" << trials << " random trials.\n";
     return 0;
 }
